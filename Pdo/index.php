@@ -1,5 +1,5 @@
 <?php
-include "./connection.php";
+include "./includes/connection.php";
 session_start();
 // $_SESSION['message']="";
 error_reporting(E_ALL);
@@ -80,7 +80,7 @@ ini_set('display_errors', 1);
                             </td>
                         </tr>
                         <?php
-                        include "./editstudent.php";
+                        include "./models/editstudent.php";
                         ?>
 
                 <?php
