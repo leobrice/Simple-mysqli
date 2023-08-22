@@ -1,5 +1,7 @@
 <?php
 include "./connection.php";
+    session_start();
+    // $_SESSION['message']="";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,32 +24,65 @@ include "./connection.php";
             <div>
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addnew">Add new</button>
             </div>
-            <table class="table table-stripped table-bordered">
+            <table class="table table-striped table-bordered">                
+                    <?php     if (!empty($_SESSION['message'])): ?>
+                    <div class="alert alert-success text-center">
+                        <?php 
+                            echo $_SESSION['message'];
+                            unset($_SESSION['message']);
+                        ?>
+                    </div>
+                    <?php endif; ?>
                 <thead> Students </thead>
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Age</th>
+                    <th>Last Edit</th>
                     <th>Action</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Bry</td>
-                    <td>brice@email.com</td>
-                    <td>4D</td>
-                    <td>
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
-                        <button type="button" class="btn btn-danger"> Delete</button>
-                    </td>
-                </tr>
+                <?php
+                try {
+
+
+                    $student_table = $conn->prepare("select * from Students");
+                    $student_table->execute();
+
+                    $student_table_data = $student_table->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($student_table_data as $value) {
+                ?>
+                        <tr>
+                            <td> <?php echo $value['student_id'] ?> </td>
+                            <td><?php echo $value['student_name'] ?></td>
+                            <td><?php echo $value['student_email'] ?></td>
+                            <td><?php echo $value['student_age'] ?></td>
+                            <td><?php echo $value['addedAt'] ?></td>
+                            <td>
+                                <a href="#edit_<?php echo $value['student_id'] ?>" class="btn btn-info" data-bs-toggle="modal">
+                                    Edit
+                                </a>
+                                <a href="#delete_<?php echo $value['student_id'] ?>">
+                                <button type="button" class="btn btn-danger"> Delete</button>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php include "./editstudent.php"; ?>
+                <?php
+                    }
+                } catch (PDOException $th) {
+                    echo "ERROR " . $th;
+                }
+
+                ?>
+
             </table>
         </div>
     </div>
 </body>
-<?php 
-    include "./addstudent.php";
-    include "./editstudent.php";
+<?php
+include "./addstudent.php";
+
 ?>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
