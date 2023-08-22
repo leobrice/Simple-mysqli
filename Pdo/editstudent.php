@@ -48,7 +48,7 @@
                 <div class="alert alert-danger">
                         <p class="text-center">Delete this Data</p>
                 </div>
-                <form action="./action/edit.php?id=<?php echo $value['student_id']; ?>" method="post">
+                <form action="./action/delete.php?id=<?php echo $value['student_id']; ?>" method="post">
                     <div class="row">
                         <label for="std_name" class="col-3">Name</label>
                         <div class="col-9">
