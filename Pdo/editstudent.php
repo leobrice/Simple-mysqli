@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="./action/edit.php" method="post">
+                <form action="./action/edit.php?id=<?php echo $value['student_id']; ?>" method="post">
                     <div class="row">
                         <label for="std_name" class="col-3">Name</label>
                         <div class="col-9">
@@ -28,7 +28,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="clear" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" name="submit"  class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>

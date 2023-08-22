@@ -2,6 +2,8 @@
 include "./connection.php";
     session_start();
     // $_SESSION['message']="";
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,8 +64,8 @@ include "./connection.php";
                                 <a href="#edit_<?php echo $value['student_id'] ?>" class="btn btn-info" data-bs-toggle="modal">
                                     Edit
                                 </a>
-                                <a href="#delete_<?php echo $value['student_id'] ?>">
-                                <button type="button" class="btn btn-danger"> Delete</button>
+                                <a href="#delete_<?php echo $value['student_id'] ?>" class="btn btn-danger" data-bs-toggle="modal">
+                                 Delete
                                 </a>
                             </td>
                         </tr>
