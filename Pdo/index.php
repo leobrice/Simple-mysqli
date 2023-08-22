@@ -31,8 +31,8 @@ ini_set('display_errors', 1);
             <div class="card-header ">
                 PDO CRUD
             </div>
-            <div>
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addnew">Add new</button>
+            <div class="mb-4 col-4 ">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addnew"><span><i class="fa fa-plus"></i>  </span>Add New</button>
             </div>
             <table class="table table-striped table-bordered" id="example">
                 <?php if (!empty($_SESSION['message'])) : ?>
